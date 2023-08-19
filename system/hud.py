@@ -1,5 +1,7 @@
 from math import floor, ceil
+
 from system.text import Fore
+from time import sleep
 
 
 class Hud:
@@ -25,6 +27,22 @@ class Hud:
         print('PE: ', Fore.CYAN + '█' * floor(barra_var), end='')
         print(Fore.BLACK + '█' * ceil(barra_fixa), Fore.RESET +
               f'{char.status["PE"]} ({char.status_atual["PE"]})' + Fore.RESET)
+
+    @staticmethod
+    def msgDano(alvo_nome, dano, tipo=None):
+        if tipo is not None:
+            print(f'{alvo_nome} sofreu {dano} de dano de {tipo}!\n')
+            sleep(0.3)
+        else:
+            print(f'{alvo_nome} sofreu {dano} de dano!\n')
+            sleep(0.3)
+
+    @staticmethod
+    def calcularChance(atributo_p: int, atributo_s: int) -> tuple[int, int]:
+        chance_sucesso = (atributo_p+atributo_s)*5
+        chance_fracasso = (20-atributo_p-atributo_s)*5
+
+        return chance_sucesso, chance_fracasso
 
     @staticmethod
     def opcaoNaoExiste():
